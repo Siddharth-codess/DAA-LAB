@@ -1,55 +1,38 @@
 #include<iostream>
-using namespace std;
+using namespace std ;
 
 int main(){
-    int T;
-    cin >> T; 
-    
-    while(T--){
-        int n;
-        cin >> n;
+    int n;
+    cin>>n;
 
-        int arr[1000];
-        for(int i = 0; i < n; i++){   
-            cin >> arr[i];
-        }
+    int arr[n];
+    for(int i =0; i<n;i++){
+        cin>>arr[i];
+    }
 
-        int key;
-        cin >> key;  
-        
-        bool found = false;          
-        int counter = 0;
-        int low = 0;
-        int high = n - 1;            
+    bool found =false;
 
-        
-        while(low <= high){
-            int mid = low + (high - low) / 2;
-            counter++;
+    for(int k=n-1;k>=n-2 && !found ;k--){
+        int i=0;
+        int j=n-1;
 
-            if(arr[mid] == key){
-                found = true;
+        while(i<j){
+            if(arr[i]+arr[j]==arr[k]){
+                cout<<i<<" "<<" "<<j<< k<<endl;
+                found =true;
                 break;
             }
-            else if(arr[mid] < key){
-                low = mid + 1;
+            else if (arr[i]+arr[j]<arr[k]){
+                i++;
             }
             else{
-                high = mid - 1;
+                j--;
             }
         }
-
-        if(found){
-            cout << "found " << counter << endl;
-        }
-        else{
-            cout << "not found " << counter << endl;
-        }
+    }
+    if(!found){
+        cout<<" not found";
     }
 
     return 0;
 }
-
-
-
-
