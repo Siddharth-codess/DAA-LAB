@@ -1,41 +1,29 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int main() {
+int main(){
     int n;
-    cin >> n;
+    cin>>n;
 
-    int arr[n];
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    vector<int> arr(n);
+    for(int i =0;i<n;i++){
+        cin>>arr[i];
     }
 
-    int k;
-    cin >> k;
+    sort(arr.begin(), arr.begin());
+    bool duplicate =false;
 
-    sort(arr, arr + n);
-
-    int i = 0, j = 1;
-    int count = 0;
-
-    while (j < n) {
-        int diff = arr[j] - arr[i];
-
-        if (diff == k) {
-            count++;
-            i++;
-            j++;
-        }
-        else if (diff < k) {
-            j++;
-        }
-        else {
-            i++;
-            if (i == j) j++;  
-        }
+    for(int i =0 ;i<n-1;i++){
+         if(arr[i]==arr[i+1]){
+            duplicate=true;
+            break;
+         }
     }
-
-    cout << "number of counts are : " << count << endl;
-
-    return 0;
+    if(duplicate){
+        cout<<"yes there is duplicate element";
+    }
+    else{
+        cout<<"not there is no duplicate elemente";
+    }
+    return 0 ;
 }

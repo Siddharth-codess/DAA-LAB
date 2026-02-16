@@ -1,75 +1,43 @@
-#include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-// first occurence of key
-int firstoccurence (int arr[],int n ,int key){
-    int low = 0, high = n-1;
-    int result =-1;
-
-    while(low<=high){
-        int mid=(low + (high-low))/2;
-
-        if(arr[mid]==key){
-            result = mid;
-            high = mid-1;
-        }
-        else if(arr[mid]<key){
-            low = mid +1;
-        }
-        else {
-            high = mid -1;
-        }
-    
-    
-}
-return result;
-}
-
-//second occurence of key
-int lastoccurence(int arr[] , int n, int key){
-    int low = 0;
-    int high =n-1;
-    int result =-1;
-    while(low<=high){
-        int mid =(low + (high-low))/2;
-
-        if(arr[mid]==key){
-            result=mid;
-            low=mid+1;
-        }
-
-        else if(arr[mid]<key){
-            low = mid+1;
-        }
-        else{
-            high=mid -1;
-        }
-    }
-    return result ;
-}
-int main(){
+int main() {
     int n;
-    cin>> n ;
-    int arr[n];
+    cin >> n;
 
-    for(int i =0; i <n;i++){
-        cin>>arr[i];
+    vector<int> arr(n);
+    for (int i=1;i<n;i++) {
+        cin >> arr[i];
     }
 
-    int key;
-    cin>>key;
+    int comparisons = 0;
+    int shifts = 0;
 
-    int first = firstoccurence(arr, n , key);
-    if(first == -1){
-        cout<<"key not present";
-    } 
-    else{
-        int last = lastoccurence(arr,n,key);
-        int count =last - first +1;
-        cout<<"total number of ourrence are : "<<count ;
+    
+    for (int i=1;i<n;i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0) {
+            comparisons++;          
+            if (arr[j] > key) {
+                arr[j+1] = arr[j]; 
+                shifts++;
+                j--;
+            } else {
+                break;
+            }
+        }
+        arr[j+1] = key; 
     }
 
+    
+    for(int i=1;i<n;i++) {
+        cout << arr[i];
+    }
 
+    cout << "comparisons = " << comparisons << endl;
+    cout << "shifts = " << shifts << endl;
 
     return 0;
 }

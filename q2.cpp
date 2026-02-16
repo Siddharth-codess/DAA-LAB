@@ -1,38 +1,38 @@
-#include<iostream>
-using namespace std ;
+#include <bits/stdc++.h>
+using namespace std;
 
-int main(){
+int main() {
     int n;
     cin>>n;
-
-    int arr[n];
-    for(int i =0; i<n;i++){
+    vector<int> arr(n);
+    for (int i=0;i<n;i++) {
         cin>>arr[i];
     }
 
-    bool found =false;
+    int comparisons = 0;
+    int swaps = 0;
 
-    for(int k=n-1;k>=n-2 && !found ;k--){
-        int i=0;
-        int j=n-1;
+    for (int i=0;i<n;i++) {
+        int minIndex =i;
 
-        while(i<j){
-            if(arr[i]+arr[j]==arr[k]){
-                cout<<i<<" "<<" "<<j<< k<<endl;
-                found =true;
-                break;
-            }
-            else if (arr[i]+arr[j]<arr[k]){
-                i++;
-            }
-            else{
-                j--;
+        for (int j=i+1;j<n;j++) {
+            comparisons++;                
+            if (arr[j]<arr[minIndex]) {
+                minIndex =j;
             }
         }
+
+        if (minIndex !=i) {
+            swap(arr[i],arr[minIndex]); 
+            swaps++;
+        }
     }
-    if(!found){
-        cout<<" not found";
+    for (int i=0;i<n;i++) {
+        cout<<arr[i];
     }
+
+    cout <<comparisons << endl;
+    cout <<swaps << endl;
 
     return 0;
 }
